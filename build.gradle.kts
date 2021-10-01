@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.google.protobuf.gradle.*
 
 val grpcVersion: String by project
@@ -12,12 +11,12 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.5.30"
     id("com.google.protobuf") version "0.8.17"
     id("maven-publish")
 }
 
-group = "me.nahidalgo"
+group = "com.jviniciusb"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -33,24 +32,6 @@ dependencies {
     // kotlin coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnit()
-}
-
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "13"
-}
-
-sourceSets {
-    main {
-        proto {
-            srcDir("proto")
-            include("./**/*.proto")
-        }
-    }
 }
 
 protobuf {
@@ -75,6 +56,20 @@ protobuf {
         }
     }
 }
+
+sourceSets {
+    main {
+        proto {
+            srcDir("proto")
+            include("./**/*.proto")
+        }
+    }
+}
+
+tasks.withType<Jar> {
+    archiveBaseName.set("proto-hello-grpc")
+}
+
 
 publishing {
     publications {
