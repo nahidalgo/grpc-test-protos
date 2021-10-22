@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto.message.v1;
 
-service GreeterService {
+service MessageService {
   rpc SendMessage (SendMessageRequest) returns (MessageReply) {}
   rpc StreamMessages (StreamMessagesRequest) returns (stream MessageReply) {}
 }
