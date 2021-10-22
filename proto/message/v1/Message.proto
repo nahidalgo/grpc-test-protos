@@ -1,0 +1,23 @@
+syntax = "proto3";
+package proto.message.v1;
+
+service GreeterService {
+  rpc SendMessage (SendMessageRequest) returns (MessageReply) {}
+  rpc StreamMessages (StreamMessagesRequest) returns (stream MessageReply) {}
+}
+
+message Message {
+  string message = 1;
+  string sender = 2;
+}
+
+message SendMessageRequest {
+  Message name = 1;
+}
+
+message MessageReply {
+  Message message = 1;
+  string id = 2;
+}
+
+message StreamMessagesRequest {}
